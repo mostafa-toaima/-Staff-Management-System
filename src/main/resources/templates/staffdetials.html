@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CRUD</title>
+        <link rel="stylesheet" th:href="@{style.css}" />
+    </head>
+    <body>
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody> -->
+                <!-- variable experasion  -->
+                <!-- <tr>
+                    <td th:text="${staff.staffName}"></td>
+                    <td th:text="${staff.staffTitle}"></td>
+                    <td th:text="${staff.staffSalary}"></td>
+                </tr> -->
+                <!-- selection experasion -->
+                <!-- <tr th:object="${staff}">
+                    <td th:text="*{staffName}"></td>
+                    <td th:text="*{staffTitle}"></td>
+                    <td> -->
+                        <!-- unless === else lw false will wwork -->
+
+                        <!-- uniary operator -->
+
+                        <!-- <p
+                            th:text="*{staffSalary > 8000 ? 'enta tmam' : 'noo' }">Not
+                            To Much!</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+
+        <!-- <div th:switch="${staff.staffName}">
+            <p th:case="Mostafa">Hi Mostafa</p>
+            <p th:case="so">Hi so</p>
+            <p th:case="*">Not Found</p>
+        </div> -->
+
+        <!-- how use contains method -->
+        <!-- <p th:text="${#strings.contains(staffName,'M')}"></p> -->
+
+<!-- 
+
+looping
+        <table>
+            <thead>
+                <tr>
+                    <th>Staff Name</th>
+                    <th>Staff Title</th>
+                    <th>Staff Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="staff : ${allStaff}">
+                    <td th:text="${staff.staffName}"></td>
+                    <td th:text="${staff.staffTitle}"></td>
+                    <td th:text="${staff.staffSalary}"></td>
+                </tr>
+        </table> -->
+
+     
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add New Staff</title>
+        <link rel="stylesheet" th:href="@{style.css}" />
+    </head>
+    <body>
+        <h1>Staff List</h1>
+         <table>
+            <thead>
+                <tr>
+                    <th>Staff Name</th>
+                    <th>Staff Title</th>
+                    <th>Staff Salary</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="staff : ${allStaff}">
+                    <td th:text="${staff.staffName}"></td>
+                    <td th:text="${staff.staffTitle}"></td>
+                    <td th:text="${staff.staffSalary}"></td>
+                    <td><a role="button" th:href="@{/(id = ${staff.id})}">Update</a></td>
+                </tr>
+        </table>
+
+        <a role="button" href="/">Add New Staff</a>
+    </body>
+</html>
