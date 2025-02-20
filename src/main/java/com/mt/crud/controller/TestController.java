@@ -1,7 +1,5 @@
-package com.mt.crud;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.stereotype.Controller;
+package com.mt.crud.controller;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +7,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mt.crud.Staff;
+import com.mt.crud.service.StaffService;
+
 import jakarta.validation.Valid;
 
 
-@Controller
-public class StaffController {
+//@Controller
+public class TestController {
 
-    List <Staff> allStaff = new ArrayList<>(); //this call same data add and not clear data
+    // List <Staff> allStaff = new ArrayList<>(); //this call same data add and not clear data
     // List<Staff> allStaff = Arrays.asList(
     //         // asList() method returns a fixed-size list backed by the specified array.
     //         //ArrayList is a resizable array, which can grow and shrink its size.
@@ -33,40 +34,38 @@ public class StaffController {
     //     model.addAttribute("Staff", myStaff);
     //     return "staffdetials";
     // }
-    
+
+
+    StaffService staffService = new StaffService();
     @GetMapping("/")
     public String addNewStaff(Model model, @RequestParam(required = false) String id) {
-        int index = generateIndex(id);
-        model.addAttribute("addNewStaff", index == -1 ? new Staff() : allStaff.get(index));
-        return "addNewStaff";
+//        int index = staffService.getStaffIndex(id);
+//        model.addAttribute("addNewStaff", index == Constants.NO_MATCH ? new Staff() : staffService.getStaffByIndex(index));
+        model.addAttribute("addNewStaffTest", staffService.getStaffById(id));
+
+        return "addNewStaffTest";
     }
 
-    private int generateIndex(String id) {
-        for (int i = 0; i < allStaff.size(); i++) {
-            if (allStaff.get(i).getId().equals(id))
-                return i;
-        }
-        return Constants.NO_MATCH;
-    }
+
 
     @PostMapping("/dataSubmitForm")
     public String dataSubmitForm(@Valid @ModelAttribute("addNewStaff") Staff staff, BindingResult result) {
         if (result.hasErrors()) {
-            
-            return "addNewStaff";
+
+            return "addNewStaffTest";
         }
-        int index = generateIndex(staff.getId());
+        int index = staffService.getStaffIndex(staff.getId());
         if (index == -1) {
-            allStaff.add(staff);
+            staffService.addStaff(staff);
         } else {
-            allStaff.set(index, staff);
+            staffService.updateStaff(staff, index);
         }
-        return "redirect:/getAllStaff";
+        return "redirect:/getAllStaffTest";
     }
-    
-    @GetMapping("/getAllStaff")
+
+    @GetMapping("/getAllStaffTest")
     public String getAllStaff(Model model) {
-        model.addAttribute("allStaff", allStaff);
-        return "getAllStaff";
+        model.addAttribute("allStaffTest", staffService.getAllStaff());
+        return "getAllStaffTest";
     }
 }
